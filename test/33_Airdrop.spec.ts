@@ -1,5 +1,7 @@
+import path from 'path';
 import { deployContract, waitTx } from './helper';
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
+import hre from 'hardhat';
 // @ts-ignore
 import { ethers } from 'hardhat';
 import { expect } from 'chai';
@@ -13,6 +15,8 @@ describe('33 Airdrop Test', () => {
 
     beforeEach('beforeEach', async () => {
         [operator, alice, bob] = await ethers.getSigners();
+        hre.config.paths.sources = path.join(process.cwd(), '33_Airdrop');
+        await hre.run('compile');
         erc20 = await deployContract(operator, '33_Airdrop/Airdrop.sol:ERC20', 'MyToken', 'MyToken');
         airdrop = await deployContract(operator, '33_Airdrop/Airdrop.sol:Airdrop');
     });
