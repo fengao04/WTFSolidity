@@ -18,6 +18,15 @@ contract SimpleUpgrade {
     // fallback函数，将调用委托给逻辑合约
     fallback() external payable {
         (bool success, bytes memory data) = implementation.delegatecall(msg.data);
+        if (success) {
+            assembly {
+                return(add(data, 32), mload(data))
+            }
+        } else {
+            assembly {
+                revert(add(data, 32), mload(data))
+            }
+        }
     }
 
     // 升级函数，改变逻辑合约地址，只能由admin调用
