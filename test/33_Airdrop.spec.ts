@@ -20,6 +20,7 @@ function compileAirdropContracts() {
         language: 'Solidity',
         sources,
         settings: {
+            evmVersion: 'london',
             outputSelection: {
                 '*': {
                     '*': ['abi', 'evm.bytecode.object'],
