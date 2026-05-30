@@ -33,7 +33,7 @@ tags:
 
 ### 代理合约
 
-这个代理合约比[第46讲](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md)中的简单。我们没有在它的`fallback()`函数中使用`内联汇编`，而仅仅用了`implementation.delegatecall(msg.data);`。因此，回调函数没有返回值，但足够教学使用了。
+这个代理合约比[第46讲](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md)中的简单。它在`fallback()`函数中使用`delegatecall`将调用转发给逻辑合约，并把逻辑合约的返回值或回滚原因原样返回给调用者。
 
 它包含`3`个变量：
 - `implementation`：逻辑合约地址。
@@ -60,18 +60,42 @@ contract SimpleUpgrade {
 
     // 构造函数，初始化admin和逻辑合约地址
     constructor(address _implementation){
+        require(_implementation.code.length > 0, "Invalid implementation");
         admin = msg.sender;
         implementation = _implementation;
     }
 
     // fallback函数，将调用委托给逻辑合约
     fallback() external payable {
-        (bool success, bytes memory data) = implementation.delegatecall(msg.data);
+        _delegate();
+    }
+
+    // 将调用委托给逻辑合约，并返回或回滚逻辑合约的执行结果
+    function _delegate() internal {
+        address _implementation = implementation;
+        require(_implementation.code.length > 0, "Invalid implementation");
+
+        assembly {
+            calldatacopy(0, 0, calldatasize())
+
+            let result := delegatecall(gas(), _implementation, 0, calldatasize(), 0, 0)
+
+            returndatacopy(0, 0, returndatasize())
+
+            switch result
+            case 0 {
+                revert(0, returndatasize())
+            }
+            default {
+                return(0, returndatasize())
+            }
+        }
     }
 
     // 升级函数，改变逻辑合约地址，只能由admin调用
     function upgrade(address newImplementation) external {
         require(msg.sender == admin);
+        require(newImplementation.code.length > 0, "Invalid implementation");
         implementation = newImplementation;
     }
 }
