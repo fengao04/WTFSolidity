@@ -26,6 +26,7 @@ function compileContracts(sources: Record<string, string>): Record<string, Compi
         language: 'Solidity',
         sources: inputSources,
         settings: {
+            evmVersion: 'paris',
             optimizer: {
                 enabled: true,
                 runs: 200,
