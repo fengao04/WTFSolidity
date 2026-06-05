@@ -21,7 +21,7 @@ function compileAirdropContracts(): Record<'Airdrop' | 'ERC20', CompiledContract
             'npx',
             [
                 '--yes',
-                'solc@0.8.30',
+                'solc@0.8.4',
                 '--base-path',
                 '.',
                 '--abi',
