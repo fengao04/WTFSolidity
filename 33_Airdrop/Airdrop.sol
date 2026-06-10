@@ -39,9 +39,10 @@ contract Airdrop {
         uint _amountSum = getSum(_amounts); // 计算空投ETH总量
         // 检查转入ETH等于空投总量
         require(msg.value == _amountSum, "Transfer amount error");
-        // for循环，利用transfer函数发送ETH
+        // for循环，利用call函数发送ETH
         for (uint256 i = 0; i < _addresses.length; i++) {
-            _addresses[i].transfer(_amounts[i]);
+            (bool success, ) = _addresses[i].call{value: _amounts[i]}("");
+            require(success, "Transfer failed");
         }
     }
 
