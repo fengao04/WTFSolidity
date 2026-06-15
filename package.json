@@ -23,6 +23,7 @@
     "hardhat-watcher": "^2.1.1",
     "lodash": "^4.17.21",
     "prettier": "^2.6.0",
+    "solc": "^0.8.35",
     "solc-js": "^1.0.1",
     "ts-node": "^10.4.0",
     "typechain": "^7.0.0",
