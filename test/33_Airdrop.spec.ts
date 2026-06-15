@@ -74,13 +74,14 @@ function compileContracts(): CompilerOutput {
         },
     };
 
-    compilerOutput = JSON.parse(solc.compile(JSON.stringify(input)));
-    const errors = compilerOutput.errors?.filter((error) => error.severity === 'error') || [];
+    const output = JSON.parse(solc.compile(JSON.stringify(input))) as CompilerOutput;
+    const errors = output.errors?.filter((error) => error.severity === 'error') || [];
     if (errors.length > 0) {
         throw new Error(errors.map((error) => error.formattedMessage).join('\n'));
     }
 
-    return compilerOutput;
+    compilerOutput = output;
+    return output;
 }
 
 async function deployCompiledContract(
