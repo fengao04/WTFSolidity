@@ -80,6 +80,8 @@ tags:
     - `_amounts`：空投数量数组，对应`_addresses`里每个地址的数量（`uint[]`类型）
 
     ```solidity
+    error TransferFailed();
+
     /// 向多个地址转账ETH
     function multiTransferETH(
         address payable[] calldata _addresses,
@@ -90,9 +92,12 @@ tags:
         uint _amountSum = getSum(_amounts); // 计算空投ETH总量
         // 检查转入ETH等于空投总量
         require(msg.value == _amountSum, "Transfer amount error");
-        // for循环，利用transfer函数发送ETH
+        // for循环，利用call函数发送ETH
         for (uint256 i = 0; i < _addresses.length; i++) {
-            _addresses[i].transfer(_amounts[i]);
+            (bool success, ) = _addresses[i].call{value: _amounts[i]}("");
+            if (!success) {
+                revert TransferFailed();
+            }
         }
     }
     ```
