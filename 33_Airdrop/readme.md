@@ -48,7 +48,7 @@ tags:
     - `_addresses`：接收空投的用户地址数组（`address[]`类型）
     - `_amounts`：空投数量数组，对应`_addresses`里每个地址的数量（`uint[]`类型）
 
-    该函数有两个检查：第一个`require`检查了`_addresses`和`_amounts`两个数组长度是否相等；第二个`require`检查了空投合约的授权额度大于要空投的代币数量总和。
+    该函数有两个检查：第一个`require`检查了`_addresses`和`_amounts`两个数组长度是否相等；第二个`require`检查了空投合约的授权额度大于或等于要空投的代币数量总和。
 
     ```solidity
     /// @notice 向多个地址转账ERC20代币，使用前需要先授权
@@ -69,7 +69,7 @@ tags:
         require(token.allowance(msg.sender, address(this)) >= _amountSum, "Need Approve ERC20 token");
         
         // for循环，利用transferFrom函数发送空投
-        for (uint8 i; i < _addresses.length; i++) {
+        for (uint256 i; i < _addresses.length; i++) {
             token.transferFrom(msg.sender, _addresses[i], _amounts[i]);
         }
     }
@@ -90,9 +90,10 @@ tags:
         uint _amountSum = getSum(_amounts); // 计算空投ETH总量
         // 检查转入ETH等于空投总量
         require(msg.value == _amountSum, "Transfer amount error");
-        // for循环，利用transfer函数发送ETH
+        // for循环，发送ETH
         for (uint256 i = 0; i < _addresses.length; i++) {
-            _addresses[i].transfer(_amounts[i]);
+            (bool success, ) = _addresses[i].call{value: _amounts[i]}("");
+            require(success, "Transfer ETH failed");
         }
     }
     ```
