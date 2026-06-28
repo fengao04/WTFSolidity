@@ -33,7 +33,7 @@ tags:
 
 ### 代理合约
 
-这个代理合约比[第46讲](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md)中的简单。我们没有在它的`fallback()`函数中使用`内联汇编`，而仅仅用了`implementation.delegatecall(msg.data);`。因此，回调函数没有返回值，但足够教学使用了。
+这个代理合约比[第46讲](https://github.com/AmazingAng/WTFSolidity/blob/main/46_ProxyContract/readme.md)中的简单。它在`fallback()`函数中使用`delegatecall`将调用委托给逻辑合约，并通过内联汇编返回逻辑合约的返回值或错误信息。
 
 它包含`3`个变量：
 - `implementation`：逻辑合约地址。
@@ -67,6 +67,15 @@ contract SimpleUpgrade {
     // fallback函数，将调用委托给逻辑合约
     fallback() external payable {
         (bool success, bytes memory data) = implementation.delegatecall(msg.data);
+        assembly {
+            switch success
+            case 0 {
+                revert(add(data, 0x20), mload(data))
+            }
+            default {
+                return(add(data, 0x20), mload(data))
+            }
+        }
     }
 
     // 升级函数，改变逻辑合约地址，只能由admin调用
