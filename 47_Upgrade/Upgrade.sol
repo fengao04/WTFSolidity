@@ -17,7 +17,20 @@ contract SimpleUpgrade {
 
     // fallback函数，将调用委托给逻辑合约
     fallback() external payable {
-        (bool success, bytes memory data) = implementation.delegatecall(msg.data);
+        assembly {
+            let _implementation := sload(0)
+            calldatacopy(0, 0, calldatasize())
+            let result := delegatecall(gas(), _implementation, 0, calldatasize(), 0, 0)
+            returndatacopy(0, 0, returndatasize())
+
+            switch result
+            case 0 {
+                revert(0, returndatasize())
+            }
+            default {
+                return(0, returndatasize())
+            }
+        }
     }
 
     // 升级函数，改变逻辑合约地址，只能由admin调用
