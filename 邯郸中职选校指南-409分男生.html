@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>邯郸中职选校指南 · 409分男生</title>
+  <style>
+    :root {
+      --bg: #f0f4f8;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #059669;
+      --warn: #d97706;
+      --danger: #dc2626;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --s-tier: #7c3aed;
+      --shadow: 0 2px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+      padding-bottom: 32px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #3b82f6 100%);
+      color: #fff;
+      padding: 28px 20px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .header .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      opacity: 0.95;
+    }
+
+    .tag {
+      background: rgba(255,255,255,0.2);
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar { display: none; }
+
+    .nav a {
+      flex-shrink: 0;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+
+    .nav a:active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .container {
+      padding: 16px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      padding-left: 10px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .alert {
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .alert-warn {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #92400e;
+    }
+
+    .alert-danger {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+    }
+
+    .alert-success {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+    }
+
+    .alert-info {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+    }
+
+    .alert strong { display: block; margin-bottom: 4px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 8px 0;
+    }
+
+    th, td {
+      padding: 10px 8px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .badge-s { background: #ede9fe; color: var(--s-tier); }
+    .badge-a { background: #dbeafe; color: var(--primary); }
+    .badge-b { background: #f1f5f9; color: var(--text-muted); }
+    .badge-ok { background: #d1fae5; color: var(--accent); }
+    .badge-no { background: #fee2e2; color: var(--danger); }
+    .badge-warn { background: #fef3c7; color: var(--warn); }
+
+    .rank-card {
+      border-left: 4px solid var(--primary);
+      padding-left: 14px;
+    }
+
+    .rank-card.top { border-left-color: var(--s-tier); }
+    .rank-card .rank-num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .rank-card.top .rank-num { color: var(--s-tier); }
+
+    .rank-card h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .rank-card .detail {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .rank-card .why {
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    .flow {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13px;
+      font-family: "SF Mono", "Menlo", monospace;
+      line-height: 1.8;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .pick-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .pick-item {
+      background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .pick-item .label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .pick-item h4 {
+      font-size: 14px;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .pick-item p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .score-row td:first-child { font-weight: 500; }
+
+    .highlight { color: var(--primary); font-weight: 600; }
+
+    ul.simple {
+      padding-left: 18px;
+      font-size: 14px;
+    }
+
+    ul.simple li { margin-bottom: 6px; }
+
+    @media (max-width: 360px) {
+      body { font-size: 14px; }
+      .header h1 { font-size: 18px; }
+      th, td { padding: 8px 6px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>河北省邯郸市中职选校指南</h1>
+    <div class="meta">
+      <span class="tag">魏县户籍</span>
+      <span class="tag">409分 · 男生</span>
+      <span class="tag">不限地域 · 看发展</span>
+      <span class="tag">2026年</span>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a href="#overview">总览</a>
+    <a href="#score">分数分析</a>
+    <a href="#major">专业趋势</a>
+    <a href="#top33">3+3 TOP</a>
+    <a href="#top32">3+2 TOP</a>
+    <a href="#best">终极推荐</a>
+    <a href="#volunteer">志愿填报</a>
+    <a href="#avoid">避坑</a>
+    <a href="#contact">联系方式</a>
+  </nav>
+
+  <div class="container">
+
+    <!-- 紧急提醒 -->
+    <div class="alert alert-warn">
+      <strong>⏰ 填报截止提醒</strong>
+      2026年邯郸中考志愿填报：<strong>7月3日14:30 — 7月5日17:30</strong>。请尽快登录平台完成填报。
+    </div>
+
+    <!-- 总览 -->
+    <section class="section" id="overview">
+      <h2 class="section-title">一、基本情况总览</h2>
+
+      <div class="card">
+        <table>
+          <tr><td>户籍</td><td>河北省邯郸市魏县</td></tr>
+          <tr><td>中考分数</td><td><strong>409 分</strong></td></tr>
+          <tr><td>性别</td><td>男生</td></tr>
+          <tr><td>魏县普高最低线</td><td><span class="badge badge-no">478 分（差69分，不能报普高）</span></td></tr>
+          <tr><td>3+4 本科</td><td><span class="badge badge-no">约560分（不够）</span></td></tr>
+          <tr><td>3+2 / 3+3</td><td><span class="badge badge-ok">省标约240分（409分足够）</span></td></tr>
+        </table>
+      </div>
+
+      <div class="alert alert-info">
+        <strong>培养模式说明</strong>
+        <strong>3+2</strong>：中职3年 + 高职2年 = 5年，拿全日制专科<br>
+        <strong>3+3</strong>：中职3年 + 高职3年 = 6年，联办高校更强，2026年全省仅27个项目<br>
+        <strong>提前批未录取不影响后续批次</strong>
+      </div>
+    </section>
+
+    <!-- 分数分析 -->
+    <section class="section" id="score">
+      <h2 class="section-title">二、409分 · 各路径可行性</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr><th>升学路径</th><th>能否选择</th><th>说明</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>普通高中</td>
+              <td><span class="badge badge-no">❌ 不能</span></td>
+              <td>魏县线478，差69分</td>
+            </tr>
+            <tr>
+              <td>3+4 本科</td>
+              <td><span class="badge badge-no">❌ 不能</span></td>
+              <td>省标约560分</td>
+            </tr>
+            <tr>
+              <td>3+3 专科</td>
+              <td><span class="badge badge-warn">⚠️ 可冲</span></td>
+              <td>竞争较激烈，优先选大计划项目</td>
+            </tr>
+            <tr>
+              <td>3+2 专科</td>
+              <td><span class="badge badge-ok">✅ 重点</span></td>
+              <td>409分远高于控制线，最稳妥</td>
+            </tr>
+            <tr>
+              <td>中职对口升学</td>
+              <td><span class="badge badge-ok">✅ 可以</span></td>
+              <td>第一批10个平行志愿</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 专业趋势 -->
+    <section class="section" id="major">
+      <h2 class="section-title">三、未来10年 · 男生专业赛道</h2>
+
+      <div class="card">
+        <div class="flow">S 级（长期天花板）
+  └─ 人工智能 / 大数据 / 信息安全 / 软件
+  └─ 工业机器人 / 智能制造 / 智能设备
+
+A 级（高景气 + 好就业）
+  └─ 新能源汽车 / 智能网联汽车
+  └─ 无人机 / 低空经济
+  └─ 物联网
+
+B 级（稳，但上限略低）
+  └─ 传统机电、普通汽修、电商、会计</div>
+      </div>
+
+      <div class="card">
+        <table>
+          <thead>
+            <tr><th>趋势领域</th><th>代表专业</th><th>等级</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>数字化 / AI</td><td>计算机应用、网络安全、大数据</td><td><span class="badge badge-s">S</span></td></tr>
+            <tr><td>智能制造</td><td>机电、工业机器人、智能设备</td><td><span class="badge badge-s">S</span></td></tr>
+            <tr><td>新能源</td><td>新能源汽车检测与维修</td><td><span class="badge badge-a">A</span></td></tr>
+            <tr><td>低空经济</td><td>无人机操控与维护</td><td><span class="badge badge-a">A</span></td></tr>
+            <tr><td>物联网</td><td>物联网应用技术</td><td><span class="badge badge-a">A</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3+3 TOP -->
+    <section class="section" id="top33">
+      <h2 class="section-title">四、全省 3+3 TOP 推荐</h2>
+      <div class="alert alert-success">
+        3+3 联办高校均为国家「双高」院校，6年制培养深度优于 3+2，2026年全省仅27个项目。
+      </div>
+
+      <div class="card rank-card top">
+        <div class="rank-num">TOP 1 · 数字化天花板</div>
+        <h3>保定市职教中心 → 河北软件职业技术学院</h3>
+        <div class="detail">计算机应用 · 人工智能技术应用 · 计划50人</div>
+        <div class="why">✦ 省内IT强校 + AI方向，数字化时代最宽赛道</div>
+      </div>
+
+      <div class="card rank-card top">
+        <div class="rank-num">TOP 2 · 计划最大 · 409分推荐冲</div>
+        <h3>河北城乡建设学校 → 石家庄铁路职业技术学院</h3>
+        <div class="detail">智能设备运行与维护 · 机电一体化技术 · 计划140人</div>
+        <div class="why">✦ 石铁院省内顶流高职，计划多、录取机会大</div>
+      </div>
+
+      <div class="card rank-card top">
+        <div class="rank-num">TOP 3 · 低空经济</div>
+        <h3>河北城乡建设学校 → 石家庄铁路职业技术学院</h3>
+        <div class="detail">无人机操控与维护 · 无人机测绘技术 · 计划80人</div>
+        <div class="why">✦ 低空经济风口 + 顶流高职</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 4</div>
+        <h3>河北城乡建设学校 → 河北化工医药职业技术学院</h3>
+        <div class="detail">无人机操控与维护 · 无人机应用技术 · 计划85人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 5 · 大计划</div>
+        <h3>河北经济管理学校 → 河北化工医药职业技术学院</h3>
+        <div class="detail">计算机网络技术 · 计算机网络技术 · 计划100人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 6</div>
+        <h3>河北经济管理学校 → 河北软件职业技术学院</h3>
+        <div class="detail">计算机网络技术 · 计算机网络技术 · 计划60人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 7</div>
+        <h3>北方机电工业学校 → 秦皇岛职业技术学院</h3>
+        <div class="detail">物联网技术应用 · 物联网应用技术 · 计划35人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 8 · 邯郸最近</div>
+        <h3>邯郸市职教中心 → 石家庄信息工程职业学院</h3>
+        <div class="detail">机电技术应用 · 机电一体化技术 · 计划30人</div>
+      </div>
+    </section>
+
+    <!-- 3+2 TOP -->
+    <section class="section" id="top32">
+      <h2 class="section-title">五、全省 3+2 TOP 推荐</h2>
+
+      <div class="card rank-card top">
+        <div class="rank-num">TOP 1 · 计划最大</div>
+        <h3>河北城乡建设学校 → 河北轨道运输职业技术学院</h3>
+        <div class="detail">智能设备运行与维护 · 电气自动化技术 · 计划200人</div>
+        <div class="why">✦ 全省最大单项目之一，智能制造核心</div>
+      </div>
+
+      <div class="card rank-card top">
+        <div class="rank-num">TOP 2</div>
+        <h3>沧州工贸学校 → 沧州职业技术学院</h3>
+        <div class="detail">计算机应用 · 大数据技术 · 计划150人</div>
+        <div class="why">✦ 大数据是AI基础，计划超大</div>
+      </div>
+
+      <div class="card rank-card top">
+        <div class="rank-num">TOP 3</div>
+        <h3>固安县职业技术教育中心 → 唐山海运职业学院</h3>
+        <div class="detail">计算机应用 · 大数据技术 · 计划150人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 4 · 新能源</div>
+        <h3>沧州工贸学校 → 沧州职业技术学院</h3>
+        <div class="detail">汽车制造与检测 · 新能源汽车技术 · 计划100人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 5</div>
+        <h3>赞皇县职业技术教育中心 → 河北轨道运输职业技术学院</h3>
+        <div class="detail">计算机应用 · 无人机测绘技术 · 计划100人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 6 · 机器人</div>
+        <h3>隆尧县 / 景县职校 → 河北机电 / 衡水职业技术学院</h3>
+        <div class="detail">工业机器人技术应用 · 工业机器人/智能机器人技术</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 7 · 职业本科</div>
+        <h3>石家庄装备制造学校 → 河北工业职业技术大学</h3>
+        <div class="detail">计算机网络技术 · 大数据技术 · 计划50人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">TOP 8 · 网络安全</div>
+        <h3>多地职校 → 邯郸幼专 / 各地高职</h3>
+        <div class="detail">计算机应用 · 信息安全技术应用 · 计划50人</div>
+      </div>
+
+      <div class="card rank-card">
+        <div class="rank-num">本地备选</div>
+        <h3>魏县综合职业技术教育中心 → 河北女子职业技术学院</h3>
+        <div class="detail">计算机应用 · 计算机应用技术 · 计划50人</div>
+        <div class="why">✦ 魏县本地3+2，5年拿大专，可作为保底</div>
+      </div>
+    </section>
+
+    <!-- 终极推荐 -->
+    <section class="section" id="best">
+      <h2 class="section-title">六、终极推荐 · 按方向选</h2>
+
+      <div class="pick-grid">
+        <div class="pick-item">
+          <div class="label">👑 综合第一 · 坐办公室搞技术</div>
+          <h4>人工智能 / 大数据 / 计算机类</h4>
+          <p><strong>首选：</strong>保定职教中心 3+3 → 河北软件 · 人工智能（50人）<br>
+          <strong>次选：</strong>沧州/固安 3+2 → 大数据技术（150人）<br>
+          <strong>保底：</strong>各地 3+2 → 信息安全技术应用（50人）</p>
+        </div>
+
+        <div class="pick-item">
+          <div class="label">🔧 动手型第一</div>
+          <h4>智能设备 / 工业机器人 / 机电</h4>
+          <p><strong>首选：</strong>河北城建 3+3 → 石铁院 · 智能设备/机电（140人）<br>
+          <strong>次选：</strong>河北城建 3+2 → 河北轨道 · 电气自动化（200人）<br>
+          <strong>进阶：</strong>隆尧/景县 3+2 → 工业机器人</p>
+        </div>
+
+        <div class="pick-item">
+          <div class="label">🚗 新能源第一</div>
+          <h4>新能源汽车 / 智能网联汽车</h4>
+          <p><strong>首选：</strong>沧州工贸 3+2 · 汽车制造 → 新能源汽车（100人）<br>
+          <strong>次选：</strong>秦皇岛工业 3+2 · 智能网联汽车技术</p>
+        </div>
+
+        <div class="pick-item">
+          <div class="label">🚁 新兴赛道</div>
+          <h4>无人机 / 低空经济</h4>
+          <p><strong>首选：</strong>河北城建 3+3 → 石铁院 · 无人机测绘（80人）<br>
+          <strong>次选：</strong>赞皇县 3+2 → 无人机测绘（100人）</p>
+        </div>
+      </div>
+
+      <div class="alert alert-success" style="margin-top:12px;">
+        <strong>一句话结论</strong>
+        只看未来发展：首选「AI/大数据」3+3或3+2；动手型选「智能设备/工业机器人」；409分应优先抢「计划100人以上」的TOP项目。
+      </div>
+    </section>
+
+    <!-- 志愿填报 -->
+    <section class="section" id="volunteer">
+      <h2 class="section-title">七、409分 · 志愿排序建议</h2>
+
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:10px;">提前批 · 3+3（可选，未录不影响后面）</h3>
+        <ol class="simple">
+          <li>河北城建 · 智能设备 → 石铁院 机电（140人）</li>
+          <li>河北城建 · 无人机 → 石铁院 / 化工医药</li>
+          <li>河北经济管理 · 计算机网络 → 化工医药（100人）</li>
+          <li>保定职教 · 计算机 → 河北软件 · 人工智能（50人）</li>
+          <li>邯郸职教 · 机电 3+3（30人）</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:10px;">第一批 · 中职对口升学班（10个平行志愿）</h3>
+        <p style="font-size:14px;color:var(--text-muted);">魏县考生普高无望，此批次为重点，优先填目标院校对口升学班。</p>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:10px;">第二至四批 · 3+2 主力</h3>
+        <ol class="simple">
+          <li>河北城建 · 智能设备 → 河北轨道 · 电气自动化（200人）</li>
+          <li>沧州/固安 · 计算机 → 大数据技术（150人）</li>
+          <li>沧州工贸 · 汽车制造 → 新能源汽车（100人）</li>
+          <li>赞皇 · 计算机 → 无人机测绘（100人）</li>
+          <li>景县/隆尧 · 工业机器人</li>
+          <li>各地 · 信息安全 / 软件技术</li>
+          <li>魏县职校 · 计算机 3+2（本地保底）</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:10px;">五个录取批次</h3>
+        <table>
+          <tr><td>提前批</td><td>3+4本科、3+3专科</td></tr>
+          <tr><td>第一批</td><td>普通高中30个 + 中职对口升学10个</td></tr>
+          <tr><td>第二批</td><td>高职院校（1所2专业）</td></tr>
+          <tr><td>第三批</td><td>中职院校（1所2专业）</td></tr>
+          <tr><td>第四批</td><td>市、县属中职学校</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- 避坑 -->
+    <section class="section" id="avoid">
+      <h2 class="section-title">八、尽量避开</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr><th>专业</th><th>原因</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>幼儿保育、会计事务</td><td>与男生优势、未来趋势不匹配</td></tr>
+            <tr><td>园林、作物生产、食品加工</td><td>传统农业，天花板低</td></tr>
+            <tr><td>纯直播电商</td><td>门槛低、竞争大、替代性强</td></tr>
+            <tr><td>传统汽车维修（非新能源）</td><td>长期被新能源替代风险</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:8px;">选校额外注意</h3>
+        <ul class="simple">
+          <li>优先选有 <strong>3+2/3+3 贯通培养</strong> 的专业</li>
+          <li>关注「<strong>1+X 证书</strong>」试点校，多考电工证、计算机等级证</li>
+          <li>「计算机应用」比「计算机平面设计」就业面广</li>
+          <li>「新能源汽车」比纯「汽车维修」更有未来</li>
+          <li>前3年中职免学费，后2-3年高职按高校标准收费</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section class="section" id="contact">
+      <h2 class="section-title">九、官方查询渠道</h2>
+      <div class="card">
+        <table>
+          <tr>
+            <td>中考志愿填报</td>
+            <td><a href="http://www.hdks.net.cn" style="color:var(--primary);">www.hdks.net.cn</a></td>
+          </tr>
+          <tr>
+            <td>邯郸市教育局</td>
+            <td>0310-6261890</td>
+          </tr>
+          <tr>
+            <td>魏县职校招生</td>
+            <td>0310-3530533</td>
+          </tr>
+          <tr>
+            <td>魏县职校地址</td>
+            <td>魏县龙乡南大街529号</td>
+          </tr>
+          <tr>
+            <td>魏县职校官网</td>
+            <td>www.weixianzhijiao.com</td>
+          </tr>
+          <tr>
+            <td>2026贯通培养名单</td>
+            <td>河北省教育厅公示附件</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <p>数据来源：河北省2026年贯通培养拟批复名单 · 邯郸市教育局2026年招生政策</p>
+    <p style="margin-top:6px;">仅供参考，最终以官方发布为准</p>
+    <p style="margin-top:10px;">生成日期：2026年7月4日</p>
+  </footer>
+
+</body>
+</html>
